@@ -1,15 +1,17 @@
+print("Reading the data in the csv")
+
 import csv
 file = open("real-estate.csv")
 csvreader = csv.reader(file)
-filename = next(csvreader)
-print(filename)
+header = next(csvreader)
+# print(header)
 rows = []
 for row in csvreader:
     rows.append(row)
-print(rows)
+# print(rows)
 file.close()
 
-
+print("Sorting the data in the csv:")
 
 def mergeSort(rows):
     if len(rows) > 1:
@@ -40,10 +42,12 @@ def mergeSort(rows):
             j+=1
             k+=1
 
-def printRows(rows):
-    new_list=[]
-    for row in range(len(rows)):
-        new_list.append({rows[row].row: rows[row][1]})
-    print(new_list)
+print(rows)
 mergeSort(rows)
-printRows(rows)
+print("Writing back to the CSV")
+filename = 'real-estate.csv'
+with open(filename, 'w', newline="") as csvfile:
+    csvwriter = csv.writer(csvfile) 
+    csvwriter.writerow(header) 
+    csvwriter.writerows(rows) 
+    print(header)
